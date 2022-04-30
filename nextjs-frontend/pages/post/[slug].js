@@ -40,39 +40,50 @@ const Post = ({ post }) => {
   } = post;
   console.log(urlFor(mainImage));
   return (
-    <motion.div className=" bg-slate-100 relative" exit={{ opacity: 0 }}>
-      <article className="p-2">
+    <motion.div
+      className=" bg-slate-100 relative"
+      exit={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 4 }}
+    >
+      <article className="w-screen bg-slate-500">
         <div
           className="imgBG"
           style={{ backgroundImage: urlFor(mainImage).url() }}
         >
-          <h1 className=" centered p-2 text-5xl font-bold font-Sora antialiased text-center underline underline-offset-2">
-            {title}
-          </h1>
+          <h1 className="blogHeader">{title}</h1>
           {mainImage && (
-            <div>
-              <img src={urlFor(mainImage).url()} alt={`${name}'s picture`} />
-            </div>
-          )}
-        </div>
-        <div className="mx-6 sm:mx-12 pb-40">
-          <span className="py-2 text-xl font-medium">By {name}</span>
-          {categories && (
-            <ul>
-              Posted in
-              {categories.map((category) => (
-                <li key={category}>{category}</li>
-              ))}
-            </ul>
-          )}
-          {authorImage && (
-            <div>
+            <div className="px-2 w-full">
               <img
-                src={urlFor(authorImage).width(50).url()}
+                src={urlFor(mainImage).url()}
                 alt={`${name}'s picture`}
+                height="100"
+                className="h-auto"
               />
             </div>
           )}
+        </div>
+        <div className="mx-6 sm:mx-12 ">
+          <div>
+            <span className="py-2 text-xl font-medium">By {name}</span>
+            {categories && (
+              <span>
+                Posted in
+                {categories.map((category) => (
+                  <li key={category}>{category}</li>
+                ))}
+              </span>
+            )}
+            {authorImage && (
+              <div className="outline-6 outline-black outline-offest-4">
+                <img
+                  src={urlFor(authorImage).width(250).height(250).url()}
+                  alt={`${name}'s picture`}
+                  className="rounded-full bg-white outline-slate-100 outline-8"
+                />
+              </div>
+            )}
+          </div>
           <PortableText value={body} components={ptComponents} />
         </div>
       </article>

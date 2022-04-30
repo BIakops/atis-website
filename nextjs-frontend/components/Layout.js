@@ -8,7 +8,7 @@ export default function Layout({ children }) {
     <motion.div className="" key={children.route} layout>
       <HeaderComponent />
 
-      <main className="relative">{children}</main>
+      <main className="">{children}</main>
 
       <div className="">
         <FooterComponent />
