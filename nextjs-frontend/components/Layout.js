@@ -8,9 +8,8 @@ export default function Layout({ children }) {
     <motion.div className="" key={children.route} layout>
       <HeaderComponent />
 
-      <main className="">{children}</main>
-
-      <div className="">
+      <main className="my-auto">{children}</main>
+      <div className="relative">
         <FooterComponent />
       </div>
     </motion.div>

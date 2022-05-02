@@ -7,7 +7,8 @@
 }
 .imgBG {
   position: relative;
-  @apply bg-center mx-8 w-fit h-fit object-cover;
+  height: 25vh;
+  @apply bg-center mx-8 w-fit object-cover;
 }
 .centered {
   position: absolute;
@@ -17,4 +18,23 @@
 }
 .blogHeader {
   @apply centered p-2 text-5xl font-bold font-Sora antialiased text-center underline underline-offset-2 hover:text-white transition-all duration-1000;
+}
+.blogIcon {
+  width: 90vw;
+  position: relative;
+  @apply bg-slate-100 items-center mx-auto text-center text-slate-900 p-4 h-60 xl:h-72 rounded-lg lg:m-4 m-2 shadow-sm shadow-gray-300 hover:shadow-md hover:shadow-gray-600 transition-all duration-300 outline-4 outline-slate-400;
+}
+.readArticle {
+  position: relative;
+  top: 50%;
+
+  left: 50%;
+  @apply p-2 bg-slate-200 rounded-lg mb-2 lg:mb-0 w-fit hover:shadow-sm hover:shadow-gray-400 relative place-content-end origin-bottom duration-300 bottom-0 hover:outline-8;
+}
+.blogArticle {
+  width: 100%;
+  @apply bg-slate-100 flex items-center text-center text-slate-900 p-4 h-40 m-4 mx-auto rounded-lg shadow-sm shadow-gray-300 hover:shadow-md hover:shadow-gray-600 transition-all duration-300 outline-4 outline-slate-400;
+}
+.blogGrid {
+  @apply flex flex-wrap justify-center items-center;
 }

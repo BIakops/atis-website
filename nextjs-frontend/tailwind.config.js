@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     fontFamily: {
       Sora: ["Sora", "sans-serif"],
+      Arimo: ["Arimo", "sans-serif"],
     },
     extend: {},
   },

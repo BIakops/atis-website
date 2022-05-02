@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const HeaderComponent = () => {
   return (
-    <div className="bg-slate-700 w-screen h-14">
+    <div className="bg-slate-700 w-screen h-14 relative top-0">
       {/* in using sm: md: lg: design mobile before desktop, its mobile priority*/}
       <Link href="/" passHref>
         <a className="headerButtons absolute text-white hover:text-black ">
@@ -12,7 +12,7 @@ const HeaderComponent = () => {
       <button className="headerButtons right-32 md:right-36 lg:right-40">
         AI
       </button>
-      <button className="headerButtons right-44 md:right-48 lg:right-56">
+      <button className="headerButtons right-40 sm:right-40 md:right-48 lg:right-48 xl:right-56">
         About
       </button>
       <button className="headerButtons right-0 ">updates/events</button>
