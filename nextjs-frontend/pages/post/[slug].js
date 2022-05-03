@@ -11,7 +11,7 @@ import useWindowDimensions from "../../components/useWindowDimensions";
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
-
+import styles from "../../styles/slug.module.css";
 const ptComponents = {
   types: {
     image: ({ value }) => {
@@ -31,6 +31,7 @@ const ptComponents = {
 
 const Post = ({ post }) => {
   const { height, width } = useWindowDimensions();
+  const mainImgheight = Math.floor(height * 0.25);
   const {
     title = "Missing title",
     name = "Missing name",
@@ -42,28 +43,29 @@ const Post = ({ post }) => {
   console.log(urlFor(mainImage));
   return (
     <motion.div
-      className=" w-screen bg-slate-200 h-fit  bg-fixed bg-center bg-repeat-y top-0 left-0"
+      className={styles.blogLayout}
       exit={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 4 }}
     >
-      <article className="">
-        <div
-          className="imgBG"
-          style={{ backgroundImage: urlFor(mainImage).url() }}
+      <div
+          className="relative"
+          style={{backgroundImage: urlFor(mainImage).size(width, mainImgheight).url()}}
         >
-          <h1 className="blogHeader">{title}</h1>
+          <h1 className={styles.blogHeader}>{title}</h1>
           {mainImage && (
             <div className="px-2">
               <img
-                src={urlFor(mainImage).size(width, 200).url()}
+                src={urlFor(mainImage).size(width, mainImgheight).url()}
                 alt={`${name}'s picture`}
-                className=""
+                className={styles.blogImg}
               />
             </div>
           )}
         </div>
-        <div className="mx-6 sm:mx-12">
+      <article className="">
+        
+        <div className="mx-6 sm:mx-12 xl:mt-8">
           <div>
             {categories && (
               <span>
@@ -125,13 +127,13 @@ export async function getStaticProps(context) {
     },
   };
 }
-Post.getLayout = function getLayout(Post) {
-  return (
-    <div className="relative">
-      <Layout>
-        <NestedLayout>{Post}</NestedLayout>
-      </Layout>
-    </div>
-  );
-};
+// Post.getLayout = function getLayout(Post) {
+//   return (
+//     <div className="relative">
+//       <Layout>
+//         <NestedLayout>{Post}</NestedLayout>
+//       </Layout>
+//     </div>
+//   );
+// };
 export default Post;

@@ -36,13 +36,38 @@ const Index = ({ posts }) => {
       <Link href="/test">
         <a>Test</a>
       </Link>
+     
+     <h1>Our Recent Posts</h1>
+      <ul className=" grid grid-auto-rows  text-white gap-2">  
+        {posts.map((post) => (
+          <li key={post._id} className="bg-gradient-to-r from-cyan-700 to-indigo-300 py-4 px-2">
+            
+            <Link href="//[id]" as={`/post/${post.slug}`}>
+
+              <a className="ml-1 md:ml-4">{post.title}</a>
+
+            </Link>
+            <Link href="/post/[id]" as={`/post/${post.slug}`}>
+              <a className="font-Arimo right-0 absolute  mr-1 md:mr-2">read article</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+
     </motion.div>
   );
 };
 
 export async function getStaticProps() {
   const posts = await client.fetch(groq`
-      *[_type == "post" && publishedAt < now()] | order(publishedAt desc)
+     *[_type == "post" && publishedAt < now()] | order(publishedAt desc){
+          _id,        
+          title,
+          publishedAt,
+          "name":author->name,
+          mainImage,
+          "slug": slug.current,
+        }[0...3]
     `);
   return {
     props: {

@@ -1,0 +1,38 @@
+.blogLayout{
+    display:flex;
+    flex: content;
+    flex-direction: column;
+    position: relative;
+    @apply flex-wrap bg-slate-200 min-h-full;
+}
+.blogImg{
+    width:100vw;
+    height:auto;
+    z-index : 0;
+    @apply bg-cover bg-center bg-no-repeat;
+}
+.authImg{
+    /* A small round image that text wraps around */
+    @apply h-10 md:h-32 lg:h-48 w-fit flex-wrap;
+    
+
+}
+.blogBody{
+    @apply font-Arimo text-base font-normal text-justify ;
+}
+.blogHeader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @apply font-Sora text-3xl bg-opacity-40 bg-slate-200 p-2 text-center text-slate-900 rounded-full;
+}
+.date{
+    
+}
+@media (min-width: 768px){
+    
+}
+@media (min-width: 1296px){
+    
+}

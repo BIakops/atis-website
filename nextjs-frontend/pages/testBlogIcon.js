@@ -18,26 +18,30 @@ function urlFor(source) {
 }
 
 const testBlogIcon = ({ posts }) => {
-  const { width, height } = useWindowDimensions();
+  const { height,width } = useWindowDimensions();
 
   return (
-    <ul className="container blogGrid content-end justify-between">
+    <ul className={styles.blogList}>
       {posts.length > 0 &&
         posts.map(
-          ({ _id, title = "", slug = "", publishedAt = "", mainImage }) =>
+          ({ _id, title = "", slug = "", publishedAt = "", mainImage, name = ""}) =>
             slug &&
             mainImage && (
-              <li className="bg-slate-200 xl:left-1/2"key={_id}>
+              <motion.li className="blogArticleExterior"key={_id} whileHover={{scale:1.05}}>
                 <Link href="/post/[slug]"
-                    as={`/post/${slug.current}`}
+                    as={`/post/${slug}`}
                     passHref>
-                <div className='innerBlog'>
-                <img className="articleImg" src={urlFor(mainImage).url()}/>
-                <p className= " articleTitle">{title}</p>
-                <p className=" articleTitle date">March 12 2022</p>
-                <a className={styles.goToBlog}>Read Article</a>
-                </div></Link>
-              </li>
+                <div className={styles.innerBlog}>
+                <img className={styles.articleImg} src={urlFor(mainImage).url()}/>
+                <p className= {styles.articleTitle}>{title} by {name}</p>
+                
+                <p className={styles.date}>{new Date(publishedAt).toDateString()}</p>
+                <motion.div className={styles.goToBlog} whileHover={{scale:1.05}}>
+                <a >Read Article</a>
+                </motion.div>
+                </div>
+                </Link>
+              </motion.li>
             )
         )}
     </ul>
@@ -46,7 +50,14 @@ const testBlogIcon = ({ posts }) => {
 
 export async function getStaticProps() {
   const posts = await client.fetch(groq`
-        *[_type == "post" && publishedAt < now()] | order(publishedAt desc)
+        *[_type == "post" && publishedAt < now()] | order(publishedAt desc){
+          _id,        
+          title,
+          publishedAt,
+          "name":author->name,
+          mainImage,
+          "slug": slug.current,
+        }
       `);
   return {
     props: {
