@@ -8,7 +8,7 @@
 .imgBG {
   position: relative;
   height: 25vh;
-  @apply bg-center mx-8 w-fit object-cover;
+  @apply bg-center mx-8 w-fit xl:h-40;
 }
 .centered {
   position: absolute;
@@ -35,8 +35,39 @@
   @apply w-screen flex-1 p-4 m-4 text-lg font-Sora antialiased text-center text-slate-900;
 }
 .blogGrid {
-  @apply flex flex-wrap justify-center items-center;
+  grid-auto-rows:auto;
+  
 }
 .readArticleBlog {
   @apply right-0;
 }
+.testParallax{
+  height:200vh;
+  width:100vw;
+}
+.innerBlog{
+display:grid;
+grid-template-rows: 1;
+@apply grid-cols-3 p-2 rounded-lg text-center;
+
+}
+.articleImg{
+grid-column:1;
+grid-row:1;
+@apply bg-center mx-auto w-fit xl:h-40;
+}
+.articleTitle{
+top:40%;
+position:relative;
+grid-column:2;
+grid-row:1;
+@apply lg:text-3xl font-bold font-Sora antialiased text-center ;
+}
+.date{
+  grid-column:2;
+  grid-row:1;
+  @apply opacity-0 md:opacity-100 top-2/3 text-xl font-Arimo;
+}
+
+
+

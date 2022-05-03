@@ -11,14 +11,19 @@ import {
 import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import Parallax from "../components/Parallax";
+import { useState } from "react";
+import '../styles/mainpage.module.css';
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
 const Index = ({ posts }) => {
+  //create a state for the scroll position
+  const [scrollY, setScrollY] = useState(0);
+
   return (
-    <motion.div exit={{ opacity: 0 }}>
+    <motion.div exit={{ opacity: 0 }} className="testParallax">
       {/* create a section where there is only text in the center */}
-      <Parallax offset={100} damping={20}>
+    
         <section className="text-center bg-slate-700 opacity-50 lg:mt-8 mt-16">
           <motion.div animate={{ rotate: 360 }} layout>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-black leading-tight">
@@ -26,9 +31,8 @@ const Index = ({ posts }) => {
             </h1>
           </motion.div>
         </section>
-      </Parallax>
-      <h1>Welcome to a blog!</h1>
-      <testBlogIcon posts={posts} />
+      <Parallax speed={10}><h1>Welcome to a blog!</h1></Parallax>
+      
       <Link href="/test">
         <a>Test</a>
       </Link>

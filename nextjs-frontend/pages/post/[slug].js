@@ -56,7 +56,7 @@ const Post = ({ post }) => {
           {mainImage && (
             <div className="px-2">
               <img
-                src={urlFor(mainImage).size(1920, 200).url()}
+                src={urlFor(mainImage).size(width, 200).url()}
                 alt={`${name}'s picture`}
                 className=""
               />
@@ -87,7 +87,7 @@ const Post = ({ post }) => {
           <PortableText
             value={body}
             components={ptComponents}
-            className="justify-text text-justify"
+            className="justify-text text-justify font-Arimo"
           />
         </div>
       </article>

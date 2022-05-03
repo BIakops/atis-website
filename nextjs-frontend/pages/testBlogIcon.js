@@ -12,11 +12,12 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import Parallax from "../components/Parallax";
 import useWindowDimensions from "../components/useWindowDimensions";
+import styles from '../styles/blogpage.module.css';
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
 
-const testBlogIcon = ({ posts }, { maxContent = 10 }) => {
+const testBlogIcon = ({ posts }) => {
   const { width, height } = useWindowDimensions();
 
   return (
@@ -26,60 +27,22 @@ const testBlogIcon = ({ posts }, { maxContent = 10 }) => {
           ({ _id, title = "", slug = "", publishedAt = "", mainImage }) =>
             slug &&
             mainImage && (
-              <li className="flex flex-wrap items-center mt-3 text-sm sm:mt-0">
-                <motion.div
-                  key={_id}
-                  whileHover={{ scale: 1.1 }}
-                  onClick={() => {
-                    console.log(slug);
-                  }}
-                  className="blogArticle group"
-                >
-                  <img
-                    src={urlFor(mainImage).url()}
-                    className=" rounded-sm outline-slate-200 w-40 h-40 outline-2"
-                  />
-                  <Link
-                    href="/post/[slug]"
+              <li className="bg-slate-200 xl:left-1/2"key={_id}>
+                <Link href="/post/[slug]"
                     as={`/post/${slug.current}`}
-                    passHref
-                  >
-                    <a className="font-sora lg:text-bold lg:text-2xl">
-                      {title}
-                    </a>
-                  </Link>{" "}
-                  <p>{new Date(publishedAt).toDateString()}</p>
-                  <div className="">
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="group readArticle"
-                    >
-                      <Link
-                        href="/post/[slug]"
-                        as={`/post/${slug.current}`}
-                        passHref
-                      >
-                        <a className="group-hover:opacity-100 text-blue-500 font-Arimo font-semibold">
-                          Read Article{" "}
-                        </a>
-                      </Link>
-                    </motion.div>
-                  </div>
-                </motion.div>
+                    passHref>
+                <div className='innerBlog'>
+                <img className="articleImg" src={urlFor(mainImage).url()}/>
+                <p className= " articleTitle">{title}</p>
+                <p className=" articleTitle date">March 12 2022</p>
+                <a className={styles.goToBlog}>Read Article</a>
+                </div></Link>
               </li>
             )
         )}
     </ul>
   );
 };
-function createMaxListView({ posts }, { maxContent = 10 }) {
-  // Create a lists of posts that are less than or equal to maxContent
-  if (posts.length < maxContent) {
-    return posts;
-  }
-  const maxList = posts.slice(0, maxContent);
-  return maxList;
-}
 
 export async function getStaticProps() {
   const posts = await client.fetch(groq`
