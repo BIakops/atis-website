@@ -39,15 +39,15 @@ const Index = ({ posts }) => {
      
      <h1>Our Recent Posts</h1>
       <ul className=" grid grid-auto-rows  text-white gap-2">  
-        {posts.map((post) => (
-          <li key={post._id} className="bg-gradient-to-r from-cyan-700 to-indigo-300 py-4 px-2">
+        {posts.map( ({_id = "", slug = "", title = ""}) => (
+          <li key={_id} className="bg-gradient-to-r from-cyan-700 to-indigo-300 py-4 px-2">
             
-            <Link href="//[id]" as={`/post/${post.slug}`}>
+            <Link href="/[slug]" as={`/post/${slug}`}>
 
-              <a className="ml-1 md:ml-4">{post.title}</a>
+              <a className="ml-1 md:ml-4">{title}</a>
 
             </Link>
-            <Link href="/post/[id]" as={`/post/${post.slug}`}>
+            <Link href="/post/[slug]" as={`/post/${slug}`}>
               <a className="font-Arimo right-0 absolute  mr-1 md:mr-2">read article</a>
             </Link>
           </li>

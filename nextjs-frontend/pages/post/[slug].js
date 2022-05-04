@@ -57,8 +57,11 @@ const Post = ({ post }) => {
             <div className="px-2">
               <img
                 src={urlFor(mainImage).size(width, mainImgheight).url()}
-                alt={`${name}'s picture`}
+                alt={`title image`}
+                width ={ width}
+                height ={ mainImgheight}
                 className={styles.blogImg}
+                priority
               />
             </div>
           )}

@@ -15,7 +15,8 @@ const HeaderComponent = () => {
       <button className="headerButtons right-40 sm:right-40 md:right-48 lg:right-48 xl:right-56">
         About
       </button>
-      <button className="headerButtons right-0 ">updates/events</button>
+      <Link href="/updates" passHref>
+      <a className="headerButtons right-0 ">updates/events</a></Link>
       {/* turn into dropdown at some point*/}
     </div>
   );
