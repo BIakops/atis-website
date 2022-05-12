@@ -24,7 +24,7 @@ const Index = ({ posts }) => {
     <motion.div exit={{ opacity: 0 }} className="testParallax">
       {/* create a section where there is only text in the center */}
     
-        <section className="text-center bg-slate-700 opacity-50 lg:mt-8 mt-16">
+        <section className="text-center bg-slate-300 blur-sm opacity-50">
           <motion.div animate={{ rotate: 360 }} layout>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-black leading-tight">
               Content Title #1

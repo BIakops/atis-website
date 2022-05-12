@@ -12,7 +12,7 @@ import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import Parallax from "../components/Parallax";
 import useWindowDimensions from "../components/useWindowDimensions";
-import styles from '../styles/blogpage.module.css';
+import styles from '../styles/blogpage.module.scss';
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
@@ -21,27 +21,27 @@ const updates = ({ posts }) => {
   const { height,width } = useWindowDimensions();
 
   return (
-    <ul className={styles.blogList}>
+    <ul className={`${styles.app__profiles} app__container`}>
       {posts.length > 0 &&
         posts.map(
           ({ _id, title = "", slug = "", publishedAt = "", mainImage, name = ""}) =>
             slug &&
             mainImage && (
-              <motion.li className="blogArticleExterior"key={_id} whileHover={{scale:1.05}}>
-                <Link href="/post/[slug]"
-                    as={`/post/${slug}`}
-                    passHref>
-                <div className={styles.innerBlog}>
-                <img className={styles.articleImg} src={urlFor(mainImage).url()}/>
-                <p className= {styles.articleTitle}>{title} by {name}</p>
-                
-                <p className={styles.date}>{new Date(publishedAt).toDateString()}</p>
-                <motion.div className={styles.goToBlog} whileHover={{scale:1.05}}>
-                <a >Read Article</a>
-                </motion.div>
-                </div>
-                </Link>
-              </motion.li>
+              <Link key={_id} href="/post/[slug]" as={`/post/${slug}`}>
+              <motion.div
+          
+          whileHover={{scale:[1,1.05]}}
+          transition={{duration:0.2,ease:"easeInOut"}}
+          className={styles.app__profileitem}
+          >
+            
+            <img src={urlFor(mainImage).url()} alt={title}/>
+            <h3 className='bold-text' style={{marginTop:20}}>{title}</h3>
+            <p className='p-text' style={{marginTop:10}}>by {name}</p>
+
+
+
+          </motion.div></Link>
             )
         )}
     </ul>

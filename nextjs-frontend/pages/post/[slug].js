@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import useWindowDimensions from "../../components/useWindowDimensions";
+import {useViewportSize} from '@mantine/hooks';
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
@@ -30,8 +31,8 @@ const ptComponents = {
 };
 
 const Post = ({ post }) => {
-  const { height, width } = useWindowDimensions();
-  const mainImgheight = Math.floor(height * 0.25);
+  const { height, width } = useViewportSize();
+  
   const {
     title = "Missing title",
     name = "Missing name",
@@ -42,61 +43,32 @@ const Post = ({ post }) => {
   } = post;
   console.log(urlFor(mainImage));
   return (
-    <motion.div
-      className={styles.blogLayout}
-      exit={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 4 }}
+    <
+      
     >
       <div
-          className="relative"
-          style={{backgroundImage: urlFor(mainImage).size(width, mainImgheight).url()}}
+          className="app__flex"
+          style={{backgroundImage: urlFor(mainImage)}}
         >
           <h1 className={styles.blogHeader}>{title}</h1>
           {mainImage && (
             <div className="px-2">
               <img
-                src={urlFor(mainImage).size(width, mainImgheight).url()}
+                src={urlFor(mainImage)}
                 alt={`title image`}
-                width ={ width}
-                height ={ mainImgheight}
+                height={parseInt(height/4)}
+                width={width}
                 className={styles.blogImg}
-                priority
+                loading="lazy"
               />
             </div>
           )}
         </div>
-      <article className="">
-        
-        <div className="mx-6 sm:mx-12 xl:mt-8">
-          <div>
-            {categories && (
-              <span>
-                Posted in
-                {categories.map((category) => (
-                  <li key={category}>{category}</li>
-                ))}
-              </span>
-            )}
-            {authorImage && (
-              <div className="outline-6 outline-black outline-offest-4 float-left p-2">
-                <img
-                  src={urlFor(authorImage).width(250).height(250).url()}
-                  alt={`${name}'s picture`}
-                  className="rounded-full bg-white outline-slate-100 outline-8"
-                />
-                <span className=" text-xl font-medium">By {name}</span>
-              </div>
-            )}
-          </div>
-          <PortableText
-            value={body}
-            components={ptComponents}
-            className="justify-text text-justify font-Arimo"
-          />
-        </div>
-      </article>
-    </motion.div>
+        <article className="p-text">
+          <PortableText value={body} components={ptComponents}  />
+        </article>
+      
+    </>
   );
 };
 
@@ -130,13 +102,17 @@ export async function getStaticProps(context) {
     },
   };
 }
-// Post.getLayout = function getLayout(Post) {
-//   return (
-//     <div className="relative">
-//       <Layout>
-//         <NestedLayout>{Post}</NestedLayout>
-//       </Layout>
-//     </div>
-//   );
-// };
+Post.getLayout = function getLayout(Post) {
+  return (
+    <motion.div className="relative"exit={{ opacity: 0 }}
+      enter={{ opacity: [0,1] }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: .5 , ease: "easeInOut",staggerChildren:0.1}}>
+      <Layout>
+        <main
+      >{Post}</main>
+      </Layout>
+    </motion.div>
+  );
+};
 export default Post;

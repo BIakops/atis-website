@@ -1,3 +1,0 @@
-.headerButtons {
-  @apply sm:px-3 lg:px-5 py-3 top-1 absolute transition-all duration-300 rounded-lg hover:shadow-md hover:bg-gray-500;
-}
